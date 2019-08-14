@@ -3,7 +3,7 @@
 <img src="https://raw.githubusercontent.com/hubbeco/delorean-challenge/master/assets/images/tenor.gif" width="188">
 
 Desafios de código tem como objetivo de testar suas habilidades na resolução de problemas do mundo real.
-Em delorean-challenge você poderá ajudar milhões de pessoas a comprar carros de forma mais inteligente a analítica.
+Em delorean-challenge você poderá ajudar milhões de pessoas a comprar e vender veículos de forma mais inteligente e analítica.
 
 ## Objetivo principal
 
