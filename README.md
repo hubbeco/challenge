@@ -21,6 +21,8 @@ Dividir e conquistar! Conheça cada etapa abaixo e elabore uma estratégia para 
 * Modelar os dados para possibilitar a construção de análises
 * Disponibilizar um meio de consulta eficiente aos dados (API, por exemplo)
 * Criar painéis com gráficos e/ou tabelas que facilitem o entendimento da informação
+* Utilize python, rust, go ou nodejs em suas análises e backend
+* Dê preferência para Reactjs na visualização dos dados (frontend)
 
 ## Resultado
 
