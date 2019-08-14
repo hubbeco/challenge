@@ -1,5 +1,7 @@
 # delorean-challenge
 
+![the_delorean](https://raw.githubusercontent.com/hubbeco/delorean-challenge/master/assets/images/tenor.gif | width=88)
+
 Desafios de código tem como objetivo de testar suas habilidades na resolução de problemas do mundo real.
 Em delorean-challenge você poderá ajudar milhões de pessoas a comprar carros de forma mais inteligente a analítica.
 
@@ -33,6 +35,8 @@ Dividir e conquistar! Conheça cada etapa abaixo e elabore uma estratégia para 
 * Ao comprar um carro zero, quais modelos perdem mais valor 2 ou 3 anos após a sua compra?
 
 Seu olhar sobre os dados podem revelar outras informações importantes, não deixe de incluir isso ao seu trabalho.
+
+![back_to_the_future](https://raw.githubusercontent.com/hubbeco/delorean-challenge/master/assets/images/il_1588xN.1499512951_ce1p.jpg | width=160)
 
 ## Créditos
 
