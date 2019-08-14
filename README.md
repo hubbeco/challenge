@@ -36,7 +36,7 @@ Dividir e conquistar! Conheça cada etapa abaixo e elabore uma estratégia para 
 
 Seu olhar sobre os dados podem revelar outras informações importantes, não deixe de incluir isso ao seu trabalho.
 
-<img src="https://raw.githubusercontent.com/hubbeco/delorean-challenge/master/assets/images/il_1588xN.1499512951_ce1p.jpg" width="188">
+<img src="https://raw.githubusercontent.com/hubbeco/delorean-challenge/master/assets/images/il_1588xN.1499512951_ce1p.jpg" width="288">
 
 ## Créditos
 
