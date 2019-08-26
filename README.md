@@ -19,8 +19,8 @@ E claro, utilizaremos dados para isso.
 
 Dividir e conquistar! Conheça cada etapa abaixo e elabore uma estratégia para resolvê-las.
 
-* Capturar dados de fontes confiáveis ([Tabela Fipe](http://veiculos.fipe.org.br), por exemplo)
-** Ferramentas como [Requests](https://2.python-requests.org/en/master/) ou [Scrapy](https://scrapy.org) podem te ajudar aqui.
+* Capturar dados de fontes confiáveis ([Tabela Fipe](http://veiculos.fipe.org.br), por exemplo)  
+  Ferramentas como [Requests](https://2.python-requests.org/en/master/) ou [Scrapy](https://scrapy.org) podem te ajudar aqui.
 * Modelar os dados para possibilitar a construção de análises
 * Disponibilizar um meio de consulta eficiente aos dados (API, por exemplo)
 * Criar painéis com gráficos e/ou tabelas que facilitem o entendimento da informação
