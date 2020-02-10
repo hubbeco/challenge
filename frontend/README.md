@@ -8,14 +8,14 @@ comum e repetitiva: encontrar o endereço e telefone de contato de potenciais cl
 
 ## Apresentação do problema
 
-No desafio, você irá ajudar a desenvolver parte de um sistema para o cliente fictício. Chamado Publicante, nosso cliente
+No desafio, você irá ajudar a desenvolver parte de um sistema para o cliente fictício. Chamado **Publicante**, nosso cliente
 é um portal de notícias muito conhecido e além de entregar notícias para toda sua audiência digital, vende espaço
 publicitário (anúncios) para que outras empresas possam divulgar sua marca. 
 
 Os vendedores da Publicante gastam uma grande parte do seu dia procurando informações de contato sobre outras empresas.
 Essas informações são utilizadas para identificar possíveis clientes e agendar visitas. 
 
-Os melhores vendedores da Publicante conseguem conversar 200 novas empresas todos os meses e para isso recebem listas de
+Os melhores vendedores conseguem conversar 200 novas empresas todos os meses e para isso recebem listas de
 empresas que costumam comprar anúncios em todo o Brasil. As listas apresentam o nome, email ou site das empresas,
 mas não informam o endereço ou o telefone de contato.
 
@@ -51,12 +51,30 @@ const serviceUrl = 'http://htmler.sandbox.hubbe.co/crawl?url='
 fetch(serviceUrl + targetUrl)
 ```
 
+#### Design:
+ 
+Incluimos algumas referências de Design na pasta [assets/layout](assets/layout).
+Para tipografia, siga as instruções abaixo:
+
+```html
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro&display=swap" rel="stylesheet">
+...
+<style>
+    body, html {
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .hint-font {
+        font-family: 'Source Code Pro', monospace;
+    }
+</style>
+```
+
 ## Resultado (o que será avaliado)
 
 * Faça o máximo que conseguir dentro do seu nível de conhecimento
 * Utilize bons padrões (patterns) da linguagem
 * Pode fazer uso de frameworks (React, Vue, etc), mas talvez não precise
 * Utilize o Github para compartilhar seu código
-  * Comece fazendo um Fork deste projeto
-  * Implemente a solução localmente
-  * Ao concluir, submeta um Pull Request com o código final 
+  - Comece fazendo um Fork deste projeto
+  - Implemente a solução localmente
+  - Ao concluir, submeta um Pull Request com o código final 

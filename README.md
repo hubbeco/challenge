@@ -14,18 +14,18 @@ Vamos tentar?! :)
 
 Escolha abaixo o desafio que melhor se adequa aos objetivos da vaga em questão.
 Se veio somente pela diversão, sinta-se a vontade para fazer qualquer desafio.  
+
+#### Frontend challenges
+* [frontend-leadfinder](frontend)
     
-* Backend challenges
-  - [em breve] [backend](backend)
+#### Backend challenges
+* [em breve] [backend](backend)
+  
+#### Data science and Machine learning challenges
+* [data-science-mining](data-science-mining)
+* [em breve] [data-engineering](data-engineering)
+* [em breve] [data-science](data-science)
+* [em breve] [machine-learning-engineering](machine-learning-engineering)
 
-* Data science and Machine learning challenges
-  - [data-science-mining](data-science-mining)
-  - [em breve] [data-engineering](data-engineering)
-  - [em breve] [data-science](data-science)
-  - [em breve] [machine-learning-engineering](machine-learning-engineering)
-
-* Design, UI/UX challenges      
-  - [em breve] [design](design)
-
-* Frontend challenges
-  - [em breve] [frontend](frontend)
+#### Design, UI/UX challenges      
+* [em breve] [design](design)
