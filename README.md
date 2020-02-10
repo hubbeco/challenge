@@ -5,7 +5,7 @@ Os desafios são destinados a todos os níveis de carreira e por isso não é es
 por completo. Contudo, a forma como o candidato resolve o problema apresentado, vai ajudar nossa equipe a entender
 sua forma de pensar e expressar ideias com código.
 
-A Hubbe trabalha com uma cultura de feedbacks construtivos e, portanto, tentaremos oferecer uma atenção especial
+A Hubbe acredita em uma cultura de feedbacks construtivos e, portanto, tentaremos oferecer uma atenção especial
 a todos que submeterem o desafio, passando para o candidato quais são os pontos positivos do seu teste e os pontos a melhorar.
 
 Se você deseja trabalhar conosco, tente realizar o desafio.
