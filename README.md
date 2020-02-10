@@ -1,11 +1,19 @@
 # Recruitment challenges
 
 De forma divertida e inteligente, desafios de código ajudam a entender e nivelar o conhecimento de cada candidato.
-Nem todos os desafios podem ser concluídos completamente, mas a forma como o candidato resolve o problema exposto
-vai ajudar nossa equipe a entender sua forma de pensar e expressar ideias com código.
+Os desafios são destinados a todos os níveis de carreira e por isso não é esperado que todos consigam realizá-los
+por completo. Contudo, a forma como o candidato resolve o problema apresentado, vai ajudar nossa equipe a entender
+sua forma de pensar e expressar ideias com código.
 
-Escolha abaixo um desafio que melhor se adeque aos objetivos da vaga em que está buscando.
-Se estiver chego aqui somente pela diversão, sinta-se a vontade para fazer qualquer desafio.  
+A Hubbe trabalha com uma cultura de feedbacks construtivos e, portanto, tentaremos oferecer uma atenção especial
+a todos que submeterem o desafio, passando para o candidato quais são os pontos positivos do seu teste e os pontos a melhorar.
+
+Se você deseja trabalhar conosco, tente realizar o desafio.
+
+Vamos tentar?! :)
+
+Escolha abaixo o desafio que melhor se adequa aos objetivos da vaga em questão.
+Se veio somente pela diversão, sinta-se a vontade para fazer qualquer desafio.  
     
 * Backend challenges
   - [em breve] [backend](backend)
