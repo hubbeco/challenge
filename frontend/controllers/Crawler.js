@@ -18,15 +18,17 @@ class Crawler {
 
   async findAddress () {
     try {
-      const keys = [{ key: 'Rua' }, { key: 'Bloco' }]
+      const keys = [{ key: 'Rua' }, { key: 'Av.' }, { key: 'Av ' }, { key: 'Rod' }, { key: 'Bairro' }]
       const response = await got(`http://${this.req.params.url}`)
       const result = response.body
       const stringAddress = result.split('>')
       const address = []
+
       for (const item of keys) {
         const { key } = item
-        for (const element of stringAddress) {
-          if (element.includes(key)) {
+        for (const item of stringAddress) {
+          if (item.includes(key) || item.match(/[0-9]{5}-[0-9]{3}/g)) {
+            const element = item.replace(/(<.*)/g, '').trim()
             address.push(element)
           }
         }
@@ -43,7 +45,6 @@ class Crawler {
       phones: await this.findPhone(),
       address: await this.findAddress()
     }
-
     return data
   }
 }
