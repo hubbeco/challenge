@@ -3,6 +3,6 @@ const addressRoute = require('./addressRoute')
 
 const router = express.Router()
 
-router.use('/address', addressRoute)
+router.use('/url', addressRoute)
 
 module.exports = router
