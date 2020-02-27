@@ -1,6 +1,6 @@
 # Marketing (digital media) challenges
 
-<img src="https://raw.githubusercontent.com/hubbeco/challenge/master/marketing/assets/images/Social-Media-Sushi.gif" width="188">
+<img src="https://raw.githubusercontent.com/hubbeco/challenge/master/marketing/assets/images/How-to-Choose-the-Best-Memes-to-Use-for-Social-Media-Marketing-02.png" width="288">
 
 Desafios de código (challenges) tem como objetivo de testar suas habilidades na resolução de problemas do mundo real.
 
@@ -46,7 +46,7 @@ um conteúdo ainda mais completo ou interessante.
 * Mantenha-se dentro do problema/tema proposto
 * Entrega dentro do prazo estipulado para o desafio
 
-<img src="https://raw.githubusercontent.com/hubbeco/challenge/master/marketing/assets/images/How-to-Choose-the-Best-Memes-to-Use-for-Social-Media-Marketing-02.png" width="188">
+<img src="https://raw.githubusercontent.com/hubbeco/challenge/master/marketing/assets/images/Social-Media-Sushi.gif" width="288">
 
 ### Boa escrita!
 [Hubbe](https://hubbe.co)
