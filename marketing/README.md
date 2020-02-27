@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/hubbeco/challenge/master/marketing/assets/images/How-to-Choose-the-Best-Memes-to-Use-for-Social-Media-Marketing-02.png" width="288">
 
-Desafios de código (challenges) tem como objetivo de testar suas habilidades na resolução de problemas do mundo real.
+Desafios práticos (challenges) tem como objetivo de testar suas habilidades na resolução de problemas do mundo real.
 
 ## Apresentação
 
