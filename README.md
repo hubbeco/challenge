@@ -27,5 +27,8 @@ Se veio somente pela diversão, sinta-se a vontade para fazer qualquer desafio.
 * [em breve] [data-science](data-science)
 * [em breve] [machine-learning-engineering](machine-learning-engineering)
 
+#### Marketing challenges      
+* [marketing-social-media](marketing)
+
 #### Design, UI/UX challenges      
 * [em breve] [design](design)
