@@ -17,6 +17,7 @@ Se veio somente pela diversão, sinta-se a vontade para fazer qualquer desafio.
 
 #### Frontend challenges
 * [frontend-leadfinder](frontend)
+* [em breve] [frontend-checkout](frontend-checkout)
     
 #### Backend challenges
 * [em breve] [backend](backend)
