@@ -20,12 +20,12 @@ Se veio somente pela diversão, sinta-se a vontade para fazer qualquer desafio.
 * [em breve] [frontend-checkout](frontend-checkout)
     
 #### Backend challenges
-* [em breve] [backend](backend)
+* [backend](backend)
   
 #### Data science and Machine learning challenges
 * [data-science-mining](data-science-mining)
 * [em breve] [data-engineering](data-engineering)
-* [em breve] [data-science](data-science)
+* [data-science](data-science)
 * [em breve] [machine-learning-engineering](machine-learning-engineering)
 
 #### Marketing challenges      
