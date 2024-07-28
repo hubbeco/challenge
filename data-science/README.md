@@ -8,9 +8,8 @@
 
 ### Descrição do desafio
 
-Este é um desafio aberto, não há solução prefinida nem objetivos claros.
-
-Divirta-se 😃
+> **_NOTE:_** Este é um desafio aberto, não há uma solução predefinida, nem objetivos específicos.
+> Divirta-se 😃
 
 Disponilizamos 2 datasets, cada um deles em 2 formatos. Eles variam em grau de dificuldade e em tipos de habilidades testadas.
 Todos os datasets estão disponíveis em AWS S3 e em google drive.
