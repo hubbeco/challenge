@@ -20,7 +20,7 @@ Você é livre para incluir qualquer trecho de código não produzido por você 
 Mencione tutoriais sempre que tomar forte inspiração deles.
 
 ## Entrega dos resultados
-Ao final do desafio, você deve nos enviar o link para um repositório (github, gitlab ou similar) contendo a implementação de sua análise (qualquer código, script, ou similar utilizado) e um arquivo pdf chamado "relatorio.pdf".
+Ao final do desafio, você deve enviar um email para [vagas@zedia.com.br](mailto:vagas@zedia.com.br) com o título "<nome do candidato> - Entrega do desafio de Data Science" contendo o link para um repositório (github, gitlab ou similar). O repositório deve conter a implementação de sua análise (qualquer código, script, ou similar utilizado) e um arquivo pdf chamado "relatorio.pdf".
 
 O **relatório** deve ter entre 1 e 5 páginas, em qualquer formatação que você preferir, contendo qualquer quantidade de imagens/diagramas/tabelas/etc que você preferir. Deve conter ao menos as seguintes seções:
 
