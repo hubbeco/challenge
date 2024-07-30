@@ -77,4 +77,4 @@ Sugestões do que pode ser analisado:
 * Agrupar os trechos por tópicos.
 * Visualizar uma núvem de palavras.
 
-## **Com tudo isso em mente. Escolha abaixo um dos desafios e boa sorte!** 🙋‍♂️
+## **Com tudo isso em mente, escolha um dos desafios e boa sorte!** 🙋‍♂️
