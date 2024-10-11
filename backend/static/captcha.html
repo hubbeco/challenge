@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+<h1>Contact Form</h1>
+<form id="contact-form">
+    <input type="text" id="name" name="name" placeholder="Your Name"><br>
+    <input type="text" id="email" name="mail" placeholder="Your Email"><br>
+    <textarea id="comment" name="comment" placeholder="Your Comment"></textarea><br>
+    <div class="g-recaptcha" data-sitekey="6Lcrml4qAAAAAHodvdQH4VzM3fdDXILN69YzyfDW" data-callback="onSubmit"></div><br>
+    <button type="submit">Submit</button>
+</form>
+
+<div id="response-message" style="margin-top: 20px; color: red; white-space: pre-wrap;"></div>
+
+<script>
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+
+        // Obtém o token do reCAPTCHA
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+            alert("Please complete the reCAPTCHA.");
+            return;
+        }
+
+        // Captura os valores dos campos do formulário (sem validação)
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const comment = document.getElementById("comment").value;
+
+        // Cria um objeto com os dados do formulário
+        const formData = {
+            "g-recaptcha-response": recaptchaResponse,
+            "name": name,
+            "mail": email,
+            "comment": comment
+        };
+
+        // Converte o objeto em JSON
+        const jsonData = JSON.stringify(formData);
+
+        // Envia os dados para o backend via fetch (requisição POST)
+        fetch("/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: jsonData
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    document.getElementById("response-message").style.color = "green";
+                    document.getElementById("response-message").textContent = "Formulário enviado com sucesso!";
+                } else {
+                    return response.json().then(data => {
+                        const errorResponse = {
+                            type: data.type,
+                            title: data.title,
+                            detail: data.detail,
+                            instance: data.instance
+                        };
+                        document.getElementById("response-message").style.color = "red";
+                        document.getElementById("response-message").textContent = JSON.stringify(errorResponse, null, 2);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("response-message").textContent = "Erro ao enviar o formulário.";
+            });
+    });
+</script>
+</body>
+</html>
