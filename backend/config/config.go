@@ -2,14 +2,12 @@ package config
 
 import (
 	"github.com/joho/godotenv"
-	"log"
 	"os"
 )
 
 func LoadConfig() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatalf("Erro ao carregar o arquivo .env: %v", err)
 	}
 }
 
@@ -27,4 +25,28 @@ func GetRecaptchaKey() string {
 
 func GetRecaptchaURL() string {
 	return os.Getenv("RECAPTCHA_URL")
+}
+
+func GetSMTPHost() string {
+	return os.Getenv("MAIL_HOST")
+}
+
+func GetSMTPPort() string {
+	return os.Getenv("MAIL_PORT")
+}
+
+func GetSMTPAuthUser() string {
+	return os.Getenv("MAIL_AUTH_USER")
+}
+
+func GetSMTPAuthPass() string {
+	return os.Getenv("MAIL_AUTH_PASS")
+}
+
+func GetMailTitle() string {
+	return os.Getenv("TEXT_MAIL_TITLE")
+}
+
+func GetMailBody() string {
+	return os.Getenv("TEXT_MAIL_BODY")
 }

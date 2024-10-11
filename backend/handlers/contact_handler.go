@@ -7,10 +7,10 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"regexp"
 )
 
 func HandleContactForm(w http.ResponseWriter, r *http.Request) {
+
 	defer handleRecover(w)
 
 	if r.Method != http.MethodPost {
@@ -36,24 +36,13 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if form.Name == "" {
-		utils.RespondWithError(w, http.StatusBadRequest, "BadRequestError", "The name is empty", "/contact")
-		return
-	}
-
-	if form.Comment == "" {
-		utils.RespondWithError(w, http.StatusBadRequest, "BadRequestError", "The comment is empty", "/contact")
-		return
-	}
-
-	emailRegex := regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$`)
-	if !emailRegex.MatchString(form.Email) {
-		utils.RespondWithError(w, http.StatusBadRequest, "BadRequestError", "The email is invalid", "/contact")
-		return
-	}
-
-	if !services.ValidateRecaptcha(form.RecaptchaResponse) {
-		utils.RespondWithError(w, http.StatusUnauthorized, "UnauthorizedError", "The captcha is incorrect!", "/contact")
+	err = services.ProcessContactForm(form)
+	if err != nil {
+		if err.Error() == "UnauthorizedError: The captcha is incorrect!" {
+			utils.RespondWithError(w, http.StatusUnauthorized, "UnauthorizedError", "The captcha is incorrect!", "/contact")
+		} else {
+			utils.RespondWithError(w, http.StatusBadRequest, "BadRequestError", err.Error(), "/contact")
+		}
 		return
 	}
 
