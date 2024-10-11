@@ -10,13 +10,18 @@ import (
 	"sync"
 )
 
-type EmailData struct {
-	To      []string
-	Subject string
-	Body    string
+var useEmailMocks = false
+
+func SetEmailMocksEnabled(enabled bool) {
+	useEmailMocks = enabled
 }
 
-func SendEmail(emailData EmailData) error {
+func SendEmail(emailData models.EmailData) error {
+
+	if useEmailMocks {
+		return SendEmailMock(emailData)
+	}
+
 	smtpHost := config.GetSMTPHost()
 	smtpPort := config.GetSMTPPort()
 	authUser := config.GetSMTPAuthUser()
@@ -113,7 +118,7 @@ func SendUserEmail(form models.ContactForm) error {
 	userBody = strings.Replace(userBody, "{email}", form.Email, -1)
 	userBody = strings.Replace(userBody, "{comment}", form.Comment, -1)
 
-	userEmailData := EmailData{
+	userEmailData := models.EmailData{
 		To:      []string{form.Email},
 		Subject: config.GetMailTitle(),
 		Body:    userBody,
@@ -125,7 +130,7 @@ func SendUserEmail(form models.ContactForm) error {
 func SendCompanyEmail(form models.ContactForm) error {
 	companyBody := fmt.Sprintf("Nome: %s\nEmail: %s\nComentário: %s", form.Name, form.Email, form.Comment)
 
-	companyEmailData := EmailData{
+	companyEmailData := models.EmailData{
 		To:      []string{"email_da_empresa@example.com"}, // Substitua pelo email real da empresa
 		Subject: "Novo contato recebido",
 		Body:    companyBody,

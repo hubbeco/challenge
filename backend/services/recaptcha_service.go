@@ -9,7 +9,18 @@ import (
 	"net/url"
 )
 
+var useRecaptchaMocks = false
+
+func SetRecaptchaMocksEnabled(enabled bool) {
+	useRecaptchaMocks = enabled
+}
+
 func ValidateRecaptcha(recaptchaResponse string) bool {
+
+	if useRecaptchaMocks {
+		return ValidateRecaptchaMock(recaptchaResponse)
+	}
+
 	secretKey := config.GetRecaptchaKey()
 	recaptchaURL := config.GetRecaptchaURL()
 
