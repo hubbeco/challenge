@@ -52,7 +52,7 @@ O dataset está disponível em dois formatos:
 
 1. **Delta:** o dataset possui 1047577 linhas. [Link do S3](https://abc.TODO). [Link do Google Drive](https://drive.google.com/file/d/1gNgnI_lLqfSrNmrH6ag8d9Bxd6zl-6hR/view?usp=sharing).
 
-2. **CSV:** o dataset foi reduzido para 100000 linhas. [Link do S3](https://abc.TODO). [Link do Google Drive](https://drive.google.com/file/d/193NSK-3UzUpDpfCLRT6Yhup84oB3Qgdk/view?usp=sharing).
+2. **CSV:** o dataset foi reduzido para 100000 linhas. [Link do S3](https://abc.TODO). [Link do Google Drive](https://drive.google.com/file/d/1VsUIlzlHcLDMaXZRKWm9_8Q2QZmOVoZP/view?usp=sharing).
 
 Sugestões do que pode ser analisado:
 * Treinar um modelo de classificação para a coluna event_type.
