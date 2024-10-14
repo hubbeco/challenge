@@ -1,0 +1,116 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API para receber e processar formulários de contato.",
+        "title": "Contact Form API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Suporte API",
+            "url": "http://www.swagger.io/support",
+            "email": "suporte@swagger.io"
+        },
+        "license": {
+            "name": "MIT License",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/contact": {
+            "post": {
+                "description": "Este endpoint recebe dados do formulário de contato, valida e envia emails.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Contato"
+                ],
+                "summary": "Recebe e processa um formulário de contato",
+                "parameters": [
+                    {
+                        "description": "Formulário de Contato",
+                        "name": "contact",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ContactForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Formulário validado com sucesso, sem retorno no body mas codigo 201",
+                        "schema": {
+                            "type": "201"
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de requisição. Possíveis detalhes: 'Name is empty', 'Comment is empty', 'Invalid email format'",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Captcha incorreto. Detalhe: 'The captcha is incorrect!'",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ErrorResponse"
+                        }
+                    },
+                    "405": {
+                        "description": "Método não permitido. Detalhe: 'Method not allowed'",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ErrorResponse"
+                        }
+                    },
+                    "415": {
+                        "description": "Content-Type incorreto. Detalhe: 'Content-Type must be application/json'",
+                        "schema": {
+                            "$ref": "#/definitions/utils.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.ContactForm": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "g-recaptcha-response": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "utils.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "detail": {
+                    "type": "string"
+                },
+                "instance": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

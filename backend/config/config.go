@@ -11,6 +11,14 @@ func LoadConfig() {
 	}
 }
 
+func GetOrigins() string {
+	origins := os.Getenv("ORIGINS")
+	if origins == "" {
+		return ""
+	}
+	return origins
+}
+
 func GetPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {

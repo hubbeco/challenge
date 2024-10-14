@@ -9,6 +9,19 @@ import (
 	"net/http"
 )
 
+// HandleContactForm godoc
+// @Summary Recebe e processa um formulário de contato
+// @Description Este endpoint recebe dados do formulário de contato, valida e envia emails.
+// @Tags Contato
+// @Accept json
+// @Produce json
+// @Param contact body models.ContactForm true "Formulário de Contato"
+// @Success 201 {201} string "Formulário validado com sucesso, sem retorno no body mas codigo 201"
+// @Failure 400 {object} utils.ErrorResponse "Erro de requisição. Possíveis detalhes: 'Name is empty', 'Comment is empty', 'Invalid email format'"
+// @Failure 401 {object} utils.ErrorResponse "Captcha incorreto. Detalhe: 'The captcha is incorrect!'"
+// @Failure 405 {object} utils.ErrorResponse "Método não permitido. Detalhe: 'Method not allowed'"
+// @Failure 415 {object} utils.ErrorResponse "Content-Type incorreto. Detalhe: 'Content-Type must be application/json'"
+// @Router /contact [post]
 func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 
 	defer handleRecover(w)
@@ -47,6 +60,7 @@ func HandleContactForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
+	w.Write([]byte("Formulário validado com sucesso! Os emails serão enviados em breve."))
 }
 
 func handleRecover(w http.ResponseWriter) {

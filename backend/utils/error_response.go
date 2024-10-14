@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// Compoem o corpo da resposta de erro
 type ErrorResponse struct {
 	Type     string `json:"type"`
 	Title    string `json:"title"`
