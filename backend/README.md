@@ -12,9 +12,7 @@ Este projeto é um microserviço para um formulário de contato que envia e-mail
 ## Requisitos
 
 - Linux
-- Go 1.23
-- Docker (recomendado para ambiente de produção)
-- Docker Compose (opcional, utilizado para testes de carga)
+- Docker
 
 ## Configuração
 
@@ -67,9 +65,10 @@ As variáveis de ambiente abaixo são usadas para configurar o microserviço de 
 
 ### Usando Docker
 
-1. Garanta que o seu usuário tenha acesso ao grupo docker:
+1. Criamos o grupo docker e adicionamos o úsuarios com os seguintes comando
 
 ```bash
+sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
 
