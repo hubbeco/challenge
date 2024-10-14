@@ -67,7 +67,7 @@ As variáveis de ambiente abaixo são usadas para configurar o microserviço de 
 
 1. Garanta que o usuário tenha o docker instalado e acesso ao grupo docker:
 
--Criamos o grupo docker e adicionamos o úsuarios com os seguintes comando
+-Instalando o docker.
 
 ```bash
 sudo snap install docker
@@ -78,6 +78,10 @@ ou
 sudo apt  install docker.io      # version 24.0.7-0ubuntu4.1
 ```
 > Nota: Comandos para instalar o docker.
+
+
+-Criamos o grupo docker e adicionamos o úsuarios com os seguintes comando
+
 
 ```bash
 sudo groupadd docker
