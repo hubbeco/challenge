@@ -93,183 +93,173 @@ docker run -p 8800:8800 -e PORT=8800 -e LOAD_TEST_MODE=true my-go-app
 
 ```bash
 docker run -e PORT=8900 -e RECAPTCHA_SITE_KEY=<Sua chave do site key> -e RECAPTCHA_KEY=<sua chave do backend> -e RECAPTCHA_URL=<"link da api que valida seu recaptcha"> -e LOAD_TEST_MODE=false -e MAIL_HOST=<Api que envia o email> -e MAIL_AUTH_USER=<Login da api de email> -e MAIL_AUTH_PASS=<Senha da api de email> -e MAIL_PORT=465 -e MAIL_SECURE=false -p 8900:8900 my-go-app
-                    ```
+```
 
-                    ### Usando Docker Compose (Ideal para Testes de Carga)
+### Usando Docker Compose (Ideal para Testes de Carga)
 
-                    1. Siga os passos 1, 2 e 3 da sessão anterior.
+1. Siga os passos 1, 2 e 3 da sessão anterior.
 
-                    2. Construa a imagem Docker:
+2. Construa a imagem Docker:
 
-                    ```bash
-                    docker build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -t my-go-app .
-                    ```
+```bash
+docker build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -t my-go-app .
+```
 
-                    3. Execute o container.
+3. Execute o container.
 
-                    #### Sintaxe para produção:
+#### Sintaxe para produção:
 
-                    ```bash
-                    PORT=8900 RECAPTCHA_SITE_KEY=<Sua chave do site key> RECAPTCHA_KEY=<sua chave do backend> RECAPTCHA_URL=<"link da api que valida seu recaptcha"> MAIL_HOST=sandbox.smtp.mailtrap.io MAIL_PORT=465 MAIL_SECURE=false MAIL_AUTH_USER=<Login da api de email> MAIL_AUTH_PASS=<Senha da api de email> LOAD_TEST_MODE=false docker-compose up --build
-                                    ```
+```bash
+PORT=8900 RECAPTCHA_SITE_KEY=<Sua chave do site key> RECAPTCHA_KEY=<sua chave do backend> RECAPTCHA_URL=<"link da api que valida seu recaptcha"> MAIL_HOST=sandbox.smtp.mailtrap.io MAIL_PORT=465 MAIL_SECURE=false MAIL_AUTH_USER=<Login da api de email> MAIL_AUTH_PASS=<Senha da api de email> LOAD_TEST_MODE=false docker-compose up --build
+```
 
-                                    #### Sintaxe para testes:
+#### Sintaxe para testes:
+```bash
+PORT=8900 LOAD_TEST_MODE=true UID=$(id -u) GID=$(id -g) docker-compose up --build
+```
 
-                                    ```bash
-                                    PORT=8900 LOAD_TEST_MODE=true UID=$(id -u) GID=$(id -g) docker-compose up --build
-                                    ```
+## Testes
+### Testes Unitários
+Para rodar os testes unitários e automatizados:
 
-                                    ## Testes
+- **IDE**: Execute o módulo `tests`.
+- **Durante o build**: Execute o seguinte comando:
 
-                                    ### Testes Unitários
-
-                                    Para rodar os testes unitários e automatizados:
-
-                                    - **IDE**: Execute o módulo `tests`.
-                                    - **Durante o build**: Execute o seguinte comando:
-
-                                    ```bash
-                                    docker build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -t my-go-app .
-                                    ```
-                                    > Nota: Os resultados dos testes unitários automatizados aparecerão como log no terminal durante o processo de build. Após o build, não será mais possível rodar os testes, pois, para otimizar a imagem para ambientes de produção, o compilador Go é removido, deixando apenas o binário nativo para execução. Para rodar os testes novamente, será necessário rebuildar a imagem.
+```bash
+docker build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -t my-go-app .
+```
+> Nota: Os resultados dos testes unitários automatizados aparecerão como log no terminal durante o processo de build. Após o build, não será mais possível rodar os testes, pois, para otimizar a imagem para ambientes de produção, o compilador Go é removido, deixando apenas o binário nativo para execução. Para rodar os testes novamente, será necessário rebuildar a imagem.
 
 
-                                    ### Testes com Postman
+### Testes com Postman
+#### 1. Configurando o endpoint de envio de contato:
 
-                                    #### 1. Configurando o endpoint de envio de contato:
+- **Método:** `POST`
+- **URL:** `http://localhost:<SUA-PORTA>/contact`
+#### Cabeçalhos (Headers):
+- **Content-Type:** `application/json`
+#### Body:
+Selecione o tipo de body como `raw` e o formato como `JSON`. Utilize o seguinte exemplo de payload:
+```json
+  {
+  "g-recaptcha-response": "sua resposta do recaptcha",
+  "comment": "Comentário de exemplo",
+  "name": "Seu nome",
+  "mail": "seu.email@example.com"
+  }
+```
+### 2. Executando o teste de envio correto:
+- Após configurar o body, clique em "Send" para enviar a requisição.
+- **Resposta esperada:** Código de status `201` para envio correto.
 
-                                    - **Método:** `POST`
-                                    - **URL:** `http://localhost:<SUA-PORTA>/contact`
+> Nota: Caso execute com LOAD_TEST_MODE=true qualquer recaptcha será aceito, caso execute com LOAD_TEST_MODE=false, será preciso configurar chaves de validação do recaptcha para que funcione, do contrário retornará 401 Unauthorized.
 
-                                        #### Cabeçalhos (Headers):
-                                        - **Content-Type:** `application/json`
+### 3. Testando erro de captcha:
 
-                                        #### Body:
-                                        Selecione o tipo de body como `raw` e o formato como `JSON`. Utilize o seguinte exemplo de payload:
+- Altere o valor de `"g-recaptcha-response"` para um valor incorreto.
+- **Resposta esperada:** Código de status `401` com um JSON de erro conforme a RFC7807:
 
-                                        ```json
-                                        {
-                                        "g-recaptcha-response": "sua resposta do recaptcha",
-                                        "comment": "Comentário de exemplo",
-                                        "name": "Seu nome",
-                                        "mail": "seu.email@example.com"
-                                        }
-                                        ```
+  ```json
+  {
+  "type": "about:blank",
+  "title": "UnauthorizedError",
+  "detail": "The captcha is incorrect!",
+  "instance": "/api-endpoint"
+  }
+  ```
 
-                                        ### 2. Executando o teste de envio correto:
+### 4. Testando erro de usuário (email inválido):
 
-                                        - Após configurar o body, clique em "Send" para enviar a requisição.
-                                        - **Resposta esperada:** Código de status `201` para envio correto.
+- Altere o campo `"mail"` para um email inválido, por exemplo, `"seu.email@"`.
+- **Resposta esperada:** Código de status `400` com um JSON de erro conforme a RFC7807:
 
+  ```json
+  {
+  "type": "about:blank",
+  "title": "BadRequestError",
+  "detail": "The email is invalid",
+  "instance": "/api-endpoint"
+  }
+    ```
 
-                                        > Nota: Caso execute com LOAD_TEST_MODE=true qualquer recaptcha será aceito, caso execute com LOAD_TEST_MODE=false, será preciso configurar chaves de validação do recaptcha para que funcione, do contrário retornará 401 Unauthorized.
+### 5. Testando erro de usuário (nome vazio):
 
-                                        ### 3. Testando erro de captcha:
+- Deixe o campo `"name"` vazio.
+- **Resposta esperada:** Código de status `400` com um JSON de erro conforme a RFC7807:
+-
+    ```json
+    {
+    "type": "about:blank",
+    "title": "BadRequestError",
+    "detail": "The name is empty",
+    "instance": "/api-endpoint"
+    }
+    ```
 
-                                        - Altere o valor de `"g-recaptcha-response"` para um valor incorreto.
-                                        - **Resposta esperada:** Código de status `401` com um JSON de erro conforme a RFC7807:
+Essas são as instruções básicas para realizar testes com o Postman em sua API de formulário de contato. Certifique-se de que a API esteja rodando e acessível no `localhost` ou no domínio configurado.
 
-                                        ```json
-                                        {
-                                        "type": "about:blank",
-                                        "title": "UnauthorizedError",
-                                        "detail": "The captcha is incorrect!",
-                                        "instance": "/api-endpoint"
-                                        }
-                                        ```
+### Testes de Carga
 
-                                        ### 4. Testando erro de usuário (email inválido):
+Os testes de carga foram executados com o framework k6 e podem ser ajustados no arquivo `load_test.js`. O docker-compose está configurado para rodar o container com 50% de CPU e 64MB de RAM, o arquivo result.html disponivel no resultado tests representa o desempenho com um i5 1340p em modo performance.
 
-                                        - Altere o campo `"mail"` para um email inválido, por exemplo, `"seu.email@"`.
-                                        - **Resposta esperada:** Código de status `400` com um JSON de erro conforme a RFC7807:
+Comando para rodar o teste de carga:
 
-                                        ```json
-                                        {
-                                        "type": "about:blank",
-                                        "title": "BadRequestError",
-                                        "detail": "The email is invalid",
-                                        "instance": "/api-endpoint"
-                                        }
-                                        ```
+```bash
+docker-compose exec --user "$(id -u):$(id -g)" k6 sh -c "umask 002 && k6 run /tests/load_test.js && chmod 664 /tests/result.html"
+```
 
-                                        ### 5. Testando erro de usuário (nome vazio):
-
-                                        - Deixe o campo `"name"` vazio.
-                                        - **Resposta esperada:** Código de status `400` com um JSON de erro conforme a RFC7807:
-
-                                        ```json
-                                        {
-                                        "type": "about:blank",
-                                        "title": "BadRequestError",
-                                        "detail": "The name is empty",
-                                        "instance": "/api-endpoint"
-                                        }
-                                        ```
-
-                                        Essas são as instruções básicas para realizar testes com o Postman em sua API de formulário de contato. Certifique-se de que a API esteja rodando e acessível no `localhost` ou no domínio configurado.
-
-                                        ### Testes de Carga
-
-                                        Os testes de carga foram executados com o framework k6 e podem ser ajustados no arquivo `load_test.js`. O docker-compose está configurado para rodar o container com 50% de CPU e 64MB de RAM, o arquivo result.html disponivel no resultado tests representa o desempenho com um i5 1340p em modo performance.
-
-                                        Comando para rodar o teste de carga:
-
-                                        ```bash
-                                        docker-compose exec --user "$(id -u):$(id -g)" k6 sh -c "umask 002 && k6 run /tests/load_test.js && chmod 664 /tests/result.html"
-                                        ```
-
-                                        > Nota: O teste de carga foi projetado para rodar via docker-compose, pois ele gerencia tanto o container da API quanto o de teste.
+> Nota: O teste de carga foi projetado para rodar via docker-compose, pois ele gerencia tanto o container da API quanto o de teste.
 
 
-                                        Após a execução dos testes de carga, um arquivo HTML é gerado no diretório `backend/tests`. Esse arquivo contém os resultados dos testes, incluindo informações sobre o desempenho da aplicação sob diferentes condições de carga.
+Após a execução dos testes de carga, um arquivo HTML é gerado no diretório `backend/tests`. Esse arquivo contém os resultados dos testes, incluindo informações sobre o desempenho da aplicação sob diferentes condições de carga.
 
-                                        O arquivo gerado é:
+O arquivo gerado é:
 
-                                        - **`result.html`**: Este arquivo exibe um relatório detalhado dos testes de carga executados, incluindo o tempo de resposta das requisições e outras métricas importantes. Ele pode ser acessado no caminho:
+- **`result.html`**: Este arquivo exibe um relatório detalhado dos testes de carga executados, incluindo o tempo de resposta das requisições e outras métricas importantes. Ele pode ser acessado no caminho:
 
-                                        ```bash
-                                        backend/tests/result.html
+```bash
+backend/tests/result.html
+```
+## Documentação da API
 
-                                        ## Documentação da API
+### POST /contact
 
-                                        ### POST /contact
+Esse endpoint recebe os dados do formulário, valida o reCAPTCHA e envia e-mails para o usuário e para a empresa.
 
-                                        Esse endpoint recebe os dados do formulário, valida o reCAPTCHA e envia e-mails para o usuário e para a empresa.
+#### Exemplo de Sucesso (201):
 
-                                        #### Exemplo de Sucesso (201):
+```json
+{
+"message": "O formulário foi validado e os e-mails serão enviados."
+}
+```
 
-                                        ```json
-                                        {
-                                        "message": "O formulário foi validado e os e-mails serão enviados."
-                                        }
-                                        ```
+#### Exemplo de Erros:
 
-                                        #### Exemplo de Erros:
+- **400 BadRequestError**: Falha na validação dos dados.
+- **401 UnauthorizedError**: O reCAPTCHA é inválido ou incorreto.
+- **405 MethodNotAllowed**: Apenas o método POST é aceito.
+- **415 UnsupportedMediaType**: O tipo de conteúdo deve ser `application/json`.
+- **500 InternalServerError**: Erro interno do servidor.
 
-                                        - **400 BadRequestError**: Falha na validação dos dados.
-                                        - **401 UnauthorizedError**: O reCAPTCHA é inválido ou incorreto.
-                                        - **405 MethodNotAllowed**: Apenas o método POST é aceito.
-                                        - **415 UnsupportedMediaType**: O tipo de conteúdo deve ser `application/json`.
-                                        - **500 InternalServerError**: Erro interno do servidor.
+### Documentação Swagger
 
-                                        ### Documentação Swagger
+A documentação completa da API pode ser acessada via Swagger:
 
-                                        A documentação completa da API pode ser acessada via Swagger:
+- **URL**: `http://localhost:<SUA-PORTA>/swagger/index.html`
 
-                                        - **URL**: `http://localhost:<SUA-PORTA>/swagger/index.html`
+## /static/recaptcha_test.html
 
-                                            ## /static/recaptcha_test.html
+Quando o container está em execução este é um formulário HTML estático disponível no caminho `http://localhost:<PORTA-DO-SEU-CONTAINER>/static/recaptcha_test.html` através do navegador. Ele foi desenvolvido para testar a integração do reCAPTCHA e o envio de e-mails. Esse formulário é utilizado apenas para testes internos, e a implementação do HTML diretamente no código Go não é uma boa prática de desenvolvimento, mas foi feita neste caso para fins de teste rápido.
 
-                                            Quando o container está em execução este é um formulário HTML estático disponível no caminho `http://localhost:<PORTA-DO-SEU-CONTAINER>/static/recaptcha_test.html` através do navegador. Ele foi desenvolvido para testar a integração do reCAPTCHA e o envio de e-mails. Esse formulário é utilizado apenas para testes internos, e a implementação do HTML diretamente no código Go não é uma boa prática de desenvolvimento, mas foi feita neste caso para fins de teste rápido.
+## Observações Adicionais
 
-                                                ## Observações Adicionais
+### Go Routines
 
-                                                ### Go Routines
+Durante os testes de carga, a aplicação faz uso intenso de Go Routines, permitindo que o microserviço lide com múltiplas requisições simultaneamente. A cada 15 segundos, o número de Go Routines ativas é registrado através de um log no terminal de execução do container, evidenciando como o Go Runtime gerencia a concorrência e paralelismo de forma eficiente.
 
-                                                Durante os testes de carga, a aplicação faz uso intenso de Go Routines, permitindo que o microserviço lide com múltiplas requisições simultaneamente. A cada 15 segundos, o número de Go Routines ativas é registrado através de um log no terminal de execução do container, evidenciando como o Go Runtime gerencia a concorrência e paralelismo de forma eficiente.
+### Vídeo de Teste de Carga
 
-                                                ### Vídeo de Teste de Carga
+Um vídeo demonstrando o teste de carga e a análise de desempenho da aplicação pode ser visualizado neste link:
 
-                                                Um vídeo demonstrando o teste de carga e a análise de desempenho da aplicação pode ser visualizado neste link:
-
-                                                [Link do vídeo](https://youtu.be/vZqO39JPCk0)
+[Link do vídeo](https://youtu.be/vZqO39JPCk0)
