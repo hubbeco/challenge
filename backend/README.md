@@ -65,14 +65,27 @@ As variáveis de ambiente abaixo são usadas para configurar o microserviço de 
 
 ### Usando Docker
 
-1. Criamos o grupo docker e adicionamos o úsuarios com os seguintes comando
+1. Garanta que o usuário tenha o docker instalado e acesso ao grupo docker:
+
+-Criamos o grupo docker e adicionamos o úsuarios com os seguintes comando
+
+```bash
+sudo snap install docker
+```
+ou
+
+```bash
+sudo apt  install docker.io      # version 24.0.7-0ubuntu4.1
+```
+> Nota: Comandos para instalar o docker.
 
 ```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
+> Nota: Comandos para instalar adicionar o docker group.
 
-2. Realize logout ou reinicie o sistema.
+2. Reinicie o sistema para aplicar as mudancas.
 
 3. Navegue até o diretório `backend`.
 
@@ -111,6 +124,7 @@ docker build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) -t my-go
 ```bash
 PORT=8900 RECAPTCHA_SITE_KEY=<Sua chave do site key> RECAPTCHA_KEY=<sua chave do backend> RECAPTCHA_URL=<"link da api que valida seu recaptcha"> MAIL_HOST=sandbox.smtp.mailtrap.io MAIL_PORT=465 MAIL_SECURE=false MAIL_AUTH_USER=<Login da api de email> MAIL_AUTH_PASS=<Senha da api de email> LOAD_TEST_MODE=false docker-compose up --build
 ```
+> Nota: A sintaxe alterativa para produção, que ira ser cita ao logo deste, trata de uma sintaxe com todas as variaveis configuradas para um uso real.
 
 #### Sintaxe para testes:
 ```bash
