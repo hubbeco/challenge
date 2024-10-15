@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-go-app
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 64M
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - ORIGINS=${ORIGINS}
+      - RECAPTCHA_KEY=${RECAPTCHA_KEY}
+      - RECAPTCHA_SITE_KEY=${RECAPTCHA_SITE_KEY}
+      - RECAPTCHA_URL=${RECAPTCHA_URL}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_SECURE=${MAIL_SECURE}
+      - MAIL_AUTH_USER=${MAIL_AUTH_USER}
+      - MAIL_AUTH_PASS=${MAIL_AUTH_PASS}
+      - TEXT_MAIL_TITLE=${TEXT_MAIL_TITLE}
+      - TEXT_MAIL_BODY=${TEXT_MAIL_BODY}
+      - LOAD_TEST_MODE=${LOAD_TEST_MODE}
+    volumes:
+      - ./docs:/app/docs
+    command: ["/app/app"]
+
+  k6:
+    image: loadimpact/k6
+    environment:
+      - K6_PORT=${PORT}
+    volumes:
+      - ./tests:/tests
+    working_dir: /tests
+    user: "${UID}:${GID}"  # Passar UID e GID dinamicamente
+    entrypoint: ["sleep", "infinity"]  # Deixar o container em "standby"

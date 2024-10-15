@@ -1,0 +1,80 @@
+basePath: /
+definitions:
+  models.ContactForm:
+    properties:
+      comment:
+        type: string
+      g-recaptcha-response:
+        type: string
+      mail:
+        type: string
+      name:
+        type: string
+    type: object
+  utils.ErrorResponse:
+    properties:
+      detail:
+        type: string
+      instance:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: suporte@swagger.io
+    name: Suporte API
+    url: http://www.swagger.io/support
+  description: API para receber e processar formulários de contato.
+  license:
+    name: MIT License
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: Contact Form API
+  version: "1.0"
+paths:
+  /contact:
+    post:
+      consumes:
+      - application/json
+      description: Este endpoint recebe dados do formulário de contato, valida e envia
+        emails.
+      parameters:
+      - description: Formulário de Contato
+        in: body
+        name: contact
+        required: true
+        schema:
+          $ref: '#/definitions/models.ContactForm'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Formulário validado com sucesso, sem retorno no body mas codigo
+            201
+          schema:
+            type: "201"
+        "400":
+          description: 'Erro de requisição. Possíveis detalhes: ''Name is empty'',
+            ''Comment is empty'', ''Invalid email format'''
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "401":
+          description: 'Captcha incorreto. Detalhe: ''The captcha is incorrect!'''
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "405":
+          description: 'Método não permitido. Detalhe: ''Method not allowed'''
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "415":
+          description: 'Content-Type incorreto. Detalhe: ''Content-Type must be application/json'''
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Recebe e processa um formulário de contato
+      tags:
+      - Contato
+swagger: "2.0"
