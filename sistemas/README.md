@@ -55,5 +55,10 @@ Alice
  * Suporte a crosscompiling
  * Utilização de makefile ou cmake
  * Utilização de doxygen para documentação
- 
+
+---
+
+_encaminhe o link de seu repositório no github para o rh._
+_o tempo esperado para o desafio é de 1 semana!_
+
 :raising_hand_man: Boa sorte!
