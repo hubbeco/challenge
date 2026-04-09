@@ -1,3 +1,5 @@
 # IDEs
 .vscode
 .idea
+build/
+vendor/
