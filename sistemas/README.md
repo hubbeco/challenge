@@ -1,6 +1,6 @@
 # Desenvolvedor de Sistemas :computer:
 
-> Candidato a contratação deve criar um banco de dados **chave/valor em C ou C++**, implementado um parser de comandos e o armazenamento.
+> Candidato a contratação deve criar um banco de dados **chave/valor em C**, implementado um parser de comandos e o armazenamento.
 
 ## Requisitos do Banco de Dados :floppy_disk:
 
@@ -15,10 +15,10 @@ O banco de dados deve implementar **apenas 4 comandos**:
 
 ### Interface
 
-Qualquer uma dessas infertaces será considerada valida.
+Expor os 3 tipos de interfaces.
 
-* Protocolo de rede próprio. _(se você achou muito fácil)_
-* Linha de comando simulada (stdin/stdout) "REPL"
+* Protocolo de rede próprio.
+* Linha de comando simulada. "REPL"
 * Funções C/C++ públicas:
     ```c
     void db_set(const char* key, const char* value);
@@ -44,7 +44,7 @@ Alice
 
 ### Regras Técnicas
 
- * Deve ser implementado em C ou C++.
+ * Deve ser implementado em C.
  * Suporte a pelo menos 100 entradas simultâneas.
  * Implementação modular e código limpo.
  * Gerenciamento de memória seguro, sem vazamentos.
@@ -59,6 +59,6 @@ Alice
 ---
 
 _encaminhe o link de seu repositório no github para o rh._
-_o tempo esperado para o desafio é de 1 semana!_
+_o tempo esperado para o desafio é de uma semana e meia!_
 
 :raising_hand_man: Boa sorte!

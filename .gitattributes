@@ -1,0 +1,3 @@
+*.txt linguist-generated
+*.lua linguist-generated
+*.c linguist-generated
